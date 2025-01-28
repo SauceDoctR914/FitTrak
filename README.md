@@ -1,75 +1,190 @@
-# Nuxt Minimal Starter
+# TypeScript Configuration Documentation
 
-Look at the [Nuxt documentation](https://nuxt.com/docs/getting-started/introduction) to learn more.
+## To use this configuration:
 
-## Setup
+1. Place this file at the root of your project as `tsconfig.json`
+2. Ensure all TypeScript files are in the correct directories
+3. Use the path aliases in your imports for cleaner code:
 
-Make sure to install dependencies:
+```typescript
+// Instead of relative paths
+import MyComponent from '../../components/MyComponent.vue'
 
-```bash
-# npm
-npm install
-
-# pnpm
-pnpm install
-
-# yarn
-yarn install
-
-# bun
-bun install
+// Use aliases
+import MyComponent from '@components/MyComponent.vue'
 ```
 
-## Development Server
+## Base Configuration
 
-Start the development server on `http://localhost:3000`:
+The configuration extends Nuxt's base TypeScript settings through:
 
-```bash
-# npm
-npm run dev
-
-# pnpm
-pnpm dev
-
-# yarn
-yarn dev
-
-# bun
-bun run dev
+```json
+{
+  "extends": "./.nuxt/tsconfig.json"
+}
 ```
 
-## Production
+## Compiler Options
 
-Build the application for production:
+### JavaScript Engine Target
+```json
+"target": "esnext"
+```
+Compiles to the latest ECMAScript features, enabling modern JavaScript capabilities.
 
-```bash
-# npm
-npm run build
+### Module System
+```json
+"module": "esnext"
+```
+Uses the latest ECMAScript module syntax, enabling tree-shaking and better optimization.
 
-# pnpm
-pnpm build
+### Module Resolution
+```json
+"moduleResolution": "node"
+```
+Uses Node.js-style resolution for module imports.
 
-# yarn
-yarn build
+### Type Checking
+```json
+"strict": true"
+```
+Enables comprehensive type checking for better code quality.
 
-# bun
-bun run build
+### Path Resolution
+```json
+"baseUrl": "."
+```
+Sets the base directory for non-relative module names.
+
+### Path Aliases
+```json
+"paths": {
+  "~/*": ["./*"],
+  "@/*": ["./*"],
+  "~~/*": ["./*"],
+  "@@/*": ["./*"],
+  "@components/*": ["./components/*"],
+  "@stores/*": ["./stores/*"],
+  "@composables/*": ["./composables/*"]
+}
 ```
 
-Locally preview production build:
+## File Management
 
-```bash
-# npm
-npm run preview
-
-# pnpm
-pnpm preview
-
-# yarn
-yarn preview
-
-# bun
-bun run preview
+### Excluded Files
+```json
+"exclude": ["node_modules", ".nuxt", "dist"]
 ```
 
-Check out the [deployment documentation](https://nuxt.com/docs/getting-started/deployment) for more information.
+### Included Files
+```json
+"include": [
+  "nuxt.config.ts",
+  "src/**/*.ts",
+  "src/**/*.d.ts",
+  "src/**/*.tsx",
+  "src/**/*.vue"
+]
+```
+
+## Best Practices
+
+1. Keep the `strict` option enabled for better type safety
+2. Use path aliases consistently throughout your project
+3. Regularly update the `include` patterns if you add new file types
+4. Don't modify the Nuxt-generated tsconfig unless absolutely necessary
+5. Keep all source files within the `src` directory for better organization
+
+---
+
+### **Extending Nuxt Defaults**
+```json```
+"extends": "./.nuxt/tsconfig.json"
+
+# TypeScript & Tailwind Configuration Guide
+
+## TypeScript Config
+
+### Base Setup
+```json
+{
+  "extends": "./.nuxt/tsconfig.json"
+}
+```
+
+### Key Options
+```json
+{
+  "target": "esnext",
+  "module": "esnext", 
+  "moduleResolution": "node",
+  "strict": true,
+  "baseUrl": "."
+}
+```
+
+### Path Aliases 
+```json
+{
+  "paths": {
+    "~/*": ["./*"],
+    "@/*": ["./*"],
+    "@components/*": ["./components/*"],
+    "@stores/*": ["./stores/*"]
+  }
+}
+```
+
+### File Management
+```json
+{
+  "exclude": ["node_modules", ".nuxt", "dist"],
+  "include": ["nuxt.config.ts", "src/**/*.{ts,d.ts,tsx,vue}"]
+}
+```
+
+## Tailwind Setup
+
+### CSS Variables
+```css
+@layer base {
+  :root {
+    --color-primary-50: 245 243 255;
+    --color-primary-100: 237 233 254;
+    --color-primary-500: 139 92 246;
+    --color-primary-900: 76 29 149;
+  }
+}
+```
+
+### Color Configuration
+```typescript
+theme: {
+  extend: {
+    colors: {
+      primary: {
+        50: "rgb(var(--color-primary-50) / <alpha-value>)",
+        100: "rgb(var(--color-primary-100) / <alpha-value>)",
+        500: "rgb(var(--color-primary-500) / <alpha-value>)",
+        900: "rgb(var(--color-primary-900) / <alpha-value>)",
+        DEFAULT: "rgb(var(--color-primary-500) / <alpha-value>)"
+      }
+    }
+  }
+}
+```
+
+### Important Notes
+- Define all color shades (50-900) for @nuxt/ui
+- Set `colors: ['primary']` in nuxt.config.ts
+- Use RGB space-separated values in CSS variables 
+- Include `DEFAULT` value pointing to 500
+- Avoid `important: true` in Tailwind config
+- Define colors in @layer base to prevent specificity issues
+
+### Debug Checklist
+- CSS variable definitions
+- Color scale completeness
+- Browser dev tools CSS conflicts
+- Path alias consistency
+- Directory structure
