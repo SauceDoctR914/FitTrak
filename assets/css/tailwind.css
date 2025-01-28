@@ -1,0 +1,61 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+
+@layer base {
+  :root {
+    --color-primary-50: 245 243 255;
+    --color-primary-100: 237 233 254;
+    --color-primary-200: 221 214 254;
+    --color-primary-300: 196 181 253;
+    --color-primary-400: 167 139 250;
+    --color-primary-500: 139 92 246;
+    --color-primary-600: 124 58 237;
+    --color-primary-700: 109 40 217;
+    --color-primary-800: 91 33 182;
+    --color-primary-900: 76 29 149;
+    --color-primary-950: 46 16 101;
+
+    /* Secondary color variables */
+    --color-secondary-50: 239 246 255;
+    --color-secondary-100: 219 234 254;
+    --color-secondary-200: 191 219 254;
+    --color-secondary-300: 147 197 253;
+    --color-secondary-400: 96 165 250;
+    --color-secondary-500: 59 130 246;
+    --color-secondary-600: 37 99 235;
+    --color-secondary-700: 29 78 216;
+    --color-secondary-800: 30 64 175;
+    --color-secondary-900: 30 58 138;
+    --color-secondary-950: 23 37 84;
+
+    /* Midnight color variables */
+    --color-midnight-50: 0 0 0;
+    --color-midnight-100: 21 21 21;
+    --color-midnight-200: 28 28 28;
+    --color-midnight-300: 35 35 35;
+    --color-midnight-400: 42 42 42;
+    --color-midnight-500: 49 49 49;
+    --color-midnight-600: 56 56 56;
+    --color-midnight-700: 63 63 63;
+    --color-midnight-800: 70 70 70;
+    --color-midnight-900: 77 77 77;
+  }
+}
+
+@layer components {
+  .btn {
+    @apply font-bold py-2 px-4 rounded;
+  }
+}
+
+@layer utilities {
+  .cell {
+    @apply mx-4 p-4;
+  }
+
+  .body {
+    @apply text-base
+  }
+}
